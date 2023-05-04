@@ -1,0 +1,41 @@
+{%  extends "students/base.html" %}
+
+{%  block body %}
+    <table class="table table-hover text-center"  >
+        <h2 class="m-4 text-center">{{ student.first_name }} {{ student.last_name }}</h2>
+        <tbody>
+
+            <tr>
+                <td>Subject Name</td>
+                <td>{{ subject.sub_name }}</td>
+            </tr>
+            <tr>
+                <td>Subject Code</td>
+                <td>{{ subject.sub_code }}</td>
+            </tr>
+            <tr>
+                <td>Subject Grade</td>
+                <td>{{ subject.grade }}</td>
+            </tr>
+            <tr>
+                <td>Subject Description</td>
+                <td>{{ subject.sub_description }}</td>
+            </tr>
+            <tr>
+                <td>Subject Reference</td>
+                <td>{{ subject.sub_reference }}</td>
+            </tr>
+            <tr>
+                <td>Teachers</td>
+                <td>
+                    <ul class="list-unstyled">
+                        {% for teacher in teachers %}
+                        <li></li>
+                        {%  endfor %}
+                    </ul>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+{%  endblock %}
