@@ -45,30 +45,24 @@ class AcademicYearForm(forms.ModelForm):
             'subject5': forms.TextInput(attrs={'class': 'form-control'}),
             'subject6': forms.TextInput(attrs={'class': 'form-control'}),
         }
-        # def __init__(self, *args, **kwargs):
-        #     super().__init__(*args, **kwargs)
-        #     used_values = AcademicYear.objects.values_list('subject1', flat=True).distinct()
-        #     self.fields('subject1').queryset=Subject.objects.exclude(value__in=used_values)
-            # used_values = AcademicYear.objects.values_list({'subject1', 'subject2', 'subject3', 'subject4', 'subject5', 'subject6'}, flat=True).distinct()
-            # self.fields('subject2').queryset=Subject.objects.exclude(value__in=used_values)
-            
-            
-            
+  
 class SubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
-        fields = ['sub_code', 'sub_name', 'sub_description','sub_reference','sub_teachers']
+        fields = ['sub_code', 'sub_name', 'sub_grade','sub_description','sub_reference','sub_teacher']
         labels ={
             'sub_code' : 'Subject Code',
             'sub_name' : 'Subject Name',
+            'sub_grade' : 'Subject Grade',
             'sub_description' : 'Subject Description',
             'sub_reference' : 'Subject reference',
-            'sub_teachers' : 'Subject Teachers',    
+            'sub_teacher' : 'Subject Teachers',    
         }
         widgets = {
             'sub_code' : forms.TextInput(attrs={'class': 'form-control'}),
             'sub_name' : forms.TextInput(attrs={'class': 'form-control'}),
-            'sub_description' : forms.TextInput(attrs={'class': 'form-control'}),
+            'sub_grade' : forms.Select(attrs={'class': 'form-control'}),
+            'sub_description' : forms.Textarea(attrs={'class': 'form-control'}),
             'sub_reference' : forms.TextInput(attrs={'class': 'form-control'}),
-            'sub_teachers' : forms.TextInput(attrs={'class': 'form-control'}),    
+            'sub_teacher' : forms.Select(attrs={'class': 'form-control'}),    
         }

@@ -16,33 +16,18 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarColor01">
                         <ul class="navbar-nav me-auto">
-
-                            <!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{% url 'index' %}"><i class="fa-solid fa-list fa-lg"></i> All Students</a>
-                            </li> -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Students</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{% url 'index' %}"><i class="fa-solid fa-list"></i> All Students</a>
-                                    <a class="dropdown-item" href="{% url 'add' %}"><i class="fa-solid fa-plus"></i> Add Student</a>
-                                    <!-- <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a> -->
-                                </div>
-                            </li>   
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Subjects</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{% url 'all_subjects' %}"><i class="fa-solid fa-list"></i> All Subjects</a>
-                                    <a class="dropdown-item" href="#"><i class="fa-solid fa-plus"></i>Add Subject</a>
-                                    <!-- <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a> -->
-                                </div>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{% url 'add' %}"><i class="fa-solid fa-plus fa-lg"></i> Add Student</a>
-                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'add' %}"><i class="fa-solid fa-plus"></i> Add Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'all_subjects' %}"><i class="fa-solid fa-list"></i> All Subjects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'add_subject' %}"><i class="fa-solid fa-plus"></i> Add Subject</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'academic_years'%}"><i class="fa-solid fa-list fa-lg"></i> Academic Years</a>
                             </li>

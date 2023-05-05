@@ -2,13 +2,7 @@ from django.db import models
 
 # Create your models here.
 class AcademicYear(models.Model):
-    options = [
-        (1, '1st yaer'),
-        (2, '2st yaer'),
-        (3, '3st yaer'),
-        (4, '4st yaer'),
-    ]
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     subject1 = models.CharField(max_length=255, null=True, blank=True)
     subject2 = models.CharField(max_length=255, null=True, blank=True)
     subject3 = models.CharField(max_length=255, null=True, blank=True)
@@ -36,7 +30,12 @@ class Student(models.Model):
     #     ordering = ['first_name']
 
 class Teachers(models.Model):
+    tech_first_name =  models.CharField(max_length=50, default='')
+    tech_last_name =  models.CharField(max_length=50, default='')
+    def __str__(self):
+        return f'DR {self.tech_first_name} {self.tech_last_name}'
     pass
+    
 
 class Subject(models.Model):
     sub_code = models.CharField(max_length=50)
@@ -44,7 +43,7 @@ class Subject(models.Model):
     sub_grade = models.ForeignKey(AcademicYear, on_delete=models.SET_NULL, null=True, blank=True)
     sub_description = models.TextField()
     sub_reference = models.CharField(max_length=100)
-    sub_teachers = models.ManyToManyField(Teachers, null=True, blank=True)
+    sub_teacher = models.ForeignKey(Teachers,on_delete=models.SET_NULL, null=True, blank=True)
     
     def __str__(self):
         return self.sub_name

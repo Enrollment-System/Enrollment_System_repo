@@ -1,0 +1,10 @@
+{%  extends "students/base.html" %}
+
+{%  block body %}
+   
+    {%  if searched %}
+        <div>{{searched}}</div>
+    {% else %}
+        <div>no</div>
+    {% endif %}
+{%  endblock %}

@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.urls import reverse 
 
 from .models import Student, AcademicYear, Subject
-from .forms import StudentForm,AcademicYearForm
+from .forms import StudentForm,AcademicYearForm,SubjectForm
 
+from django.db.models import Q
 # Create your views here.
 def index(request):
     return render(request, 'students/index.html', {
@@ -42,11 +43,11 @@ def show_student(request, id):
     
 def show_subject(request, id):
     subject = Subject.objects.get(pk=id)
-    teachers = subject.sub_teachers
+    teacher = subject.sub_teacher
     
     return render(request,'students/subject.html',{
-        'student':subject,
-        'teachers':teachers
+        'subject':subject,
+        'teacher':teacher
     })
 
 def add(request):
@@ -79,6 +80,37 @@ def add(request):
         form = StudentForm()
     return render(request, 'students/add.html',{
         'form' : StudentForm()
+    })
+    
+def add_subject(request):
+    if request.method == 'POST':
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            new_sub_code = form.cleaned_data['sub_code']
+            new_sub_name = form.cleaned_data['sub_name']
+            new_sub_grade = form.cleaned_data['sub_grade']
+            new_sub_description = form.cleaned_data['sub_description']
+            new_sub_reference = form.cleaned_data['sub_reference']
+            new_sub_teacher = form.cleaned_data['sub_teacher']
+            
+            new_subject = Subject(
+                sub_code = new_sub_code,
+                sub_name = new_sub_name,
+                sub_grade = new_sub_grade,
+                sub_description = new_sub_description,
+                sub_reference = new_sub_reference,
+                sub_teacher = new_sub_teacher,
+
+            )
+            new_subject.save()
+            return render(request, 'students/add_subject.html',{
+                'form' : SubjectForm(),
+                'success' : True
+            })
+    else:
+        form = SubjectForm()
+    return render(request, 'students/add_subject.html',{
+        'form' : SubjectForm()
     })
 
 def edit(request, id):
@@ -115,8 +147,50 @@ def edit_year(request, id):
         'form': form
     })
     
+def edit_subject(request, id):
+    if request.method == 'POST':
+        subject = Subject.objects.get(pk=id)
+        form = SubjectForm(request.POST, instance=subject)
+        if form.is_valid():
+            form.save()
+            return render(request, 'students/edit_subject.html', {
+                'form': form,
+                'success': True
+            })
+    else:
+        subject = Subject.objects.get(pk=id)
+        form = SubjectForm(instance=subject)
+    return render(request, 'students/edit_subject.html', {
+        'form': form
+    })
+    
 def delete(request, id):
     if request.method == 'POST':
         student = Student.objects.get(pk=id)
         student.delete()
     return HttpResponseRedirect(reverse('index'))
+
+def delete_subject(request, id):
+    if request.method == 'POST':
+        student = Subject.objects.get(pk=id)
+        student.delete()
+    return HttpResponseRedirect(reverse('all_subjects'))
+
+
+def search_students(request):
+    if request.method == 'POST':
+        searched=request.POST['searched']
+        results=Student.objects.filter(Q(first_name__contains=searched) | Q(last_name__contains=searched))
+    return render(request,'students/index.html',{
+        'students':results,
+        'searched':searched
+    })
+    
+def search_subjects(request):
+    if request.method == 'POST':
+        searched=request.POST['searched']
+        results=Subject.objects.filter(Q(sub_name__contains=searched) | Q(sub_code__contains=searched))
+    return render(request,'students/all_subjects.html',{
+        'subjects':results,
+        'searched':searched
+    })

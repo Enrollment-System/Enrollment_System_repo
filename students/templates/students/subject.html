@@ -2,7 +2,7 @@
 
 {%  block body %}
     <table class="table table-hover text-center"  >
-        <h2 class="m-4 text-center">{{ student.first_name }} {{ student.last_name }}</h2>
+        <h2 class="m-4 text-center">{{ subject.sub_name }} </h2>
         <tbody>
 
             <tr>
@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <td>Subject Grade</td>
-                <td>{{ subject.grade }}</td>
+                <td>{{ subject.sub_grade }}</td>
             </tr>
             <tr>
                 <td>Subject Description</td>
@@ -26,14 +26,8 @@
                 <td>{{ subject.sub_reference }}</td>
             </tr>
             <tr>
-                <td>Teachers</td>
-                <td>
-                    <ul class="list-unstyled">
-                        {% for teacher in teachers %}
-                        <li></li>
-                        {%  endfor %}
-                    </ul>
-                </td>
+                <td>Teacher</td>
+                <td>{{teacher.tech_first_name}} {{teacher.tech_last_name}}</td>
             </tr>
 
         </tbody>
