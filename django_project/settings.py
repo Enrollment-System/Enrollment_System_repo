@@ -79,9 +79,19 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'sql8616195',
+    #     'USER': 'sql8616195',
+    #     'PASSWORD':'dJyM4JITY',
+    #     'HOST':'sql8.freemysqlhosting.net',
+    #     'PORT':'3306',
+    # }
+    
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Enrollment_Manaeg_System',
+        'NAME': 'pdb',
         'USER': 'root',
         'PASSWORD':'',
         'HOST':'localhost',

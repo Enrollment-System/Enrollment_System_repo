@@ -22,7 +22,7 @@ class StudentForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'field_of_study': forms.TextInput(attrs={'class': 'form-control'}),
             'academic_year_id': forms.Select(attrs={'class': 'form-control'}),
-            'gpa': forms.NumberInput(attrs={'class': 'form-control'}),
+            'gpa': forms.NumberInput(attrs={'class': 'form-control','min':'0', 'max':'4'}),
         }
 
 class AcademicYearForm(forms.ModelForm):
