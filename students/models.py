@@ -30,9 +30,20 @@ class Student(models.Model):
     # class Meta:
     #     ordering = ['first_name']
 
-class Teachers(models.Model):
-    tech_first_name =  models.CharField(max_length=50, default='')
-    tech_last_name =  models.CharField(max_length=50, default='')
+class Department(models.Model):
+    dep_name = models.CharField(max_length=50)
+    dep_n= models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f'{self.dep_name} Department' 
+    
+class Teacher(models.Model):
+    tech_first_name =  models.CharField(max_length=50)
+    tech_last_name =  models.CharField(max_length=50)
+    tech_email =  models.EmailField(max_length=50)
+    tech_department =  models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
+    tec_dob = models.DateField()
+    
     def __str__(self):
         return f'DR {self.tech_first_name} {self.tech_last_name}'
     pass
@@ -44,7 +55,7 @@ class Subject(models.Model):
     sub_grade = models.ForeignKey(AcademicYear, on_delete=models.SET_NULL, null=True, blank=True)
     sub_description = models.TextField()
     sub_reference = models.CharField(max_length=100)
-    sub_teacher = models.ForeignKey(Teachers,on_delete=models.SET_NULL, null=True, blank=True)
+    sub_teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL, null=True, blank=True)
     
     def __str__(self):
         return self.sub_name

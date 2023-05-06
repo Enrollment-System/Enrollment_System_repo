@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse 
 
-from .models import Student, AcademicYear, Subject
-from .forms import StudentForm,AcademicYearForm,SubjectForm
+from .models import Student, AcademicYear, Subject,Teacher
+from .forms import StudentForm,AcademicYearForm,SubjectForm,TeacherForm
 
 from django.db.models import Q
 # Create your views here.
@@ -21,6 +21,11 @@ def academic_years(request):
 def all_subjects(request):
     return render(request, 'students/all_subjects.html', {
         'subjects': Subject.objects.all(),
+    })
+    
+def all_teachers(request):
+    return render(request, 'students/all_teachers.html', {
+        'teachers': Teacher.objects.all(),
     })
 
 def view_student(request, id):
@@ -48,6 +53,13 @@ def show_subject(request, id):
     return render(request,'students/subject.html',{
         'subject':subject,
         'teacher':teacher
+    })
+    
+def show_teacher(request, id):
+    teacher = Teacher.objects.get(pk=id)
+    
+    return render(request,'students/teacher.html',{
+        'teacher':teacher,
     })
 
 def add(request):
@@ -112,6 +124,35 @@ def add_subject(request):
     return render(request, 'students/add_subject.html',{
         'form' : SubjectForm()
     })
+    
+def add_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            new_tech_first_name = form.cleaned_data['tech_first_name']
+            new_tech_last_name = form.cleaned_data['tech_last_name']
+            new_tech_email = form.cleaned_data['tech_email']
+            new_tech_department = form.cleaned_data['tech_department']
+            new_tec_dob = form.cleaned_data['tec_dob']
+            
+            new_teacher = Teacher(
+                tech_first_name = new_tech_first_name,
+                tech_last_name = new_tech_last_name,
+                tech_email = new_tech_email,
+                tech_department = new_tech_department,
+                tec_dob = new_tec_dob,
+
+            )
+            new_teacher.save()
+            return render(request, 'students/add_teacher.html',{
+                'form' : TeacherForm(),
+                'success' : True
+            })
+    else:
+        form = TeacherForm()
+    return render(request, 'students/add_teacher.html',{
+        'form' : TeacherForm()
+    })
 
 def edit(request, id):
     if request.method == 'POST':
@@ -163,6 +204,23 @@ def edit_subject(request, id):
     return render(request, 'students/edit_subject.html', {
         'form': form
     })
+
+def edit_teacher(request, id):
+    if request.method == 'POST':
+        teacher = Teacher.objects.get(pk=id)
+        form = TeacherForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return render(request, 'students/edit_teacher.html', {
+                'form': form,
+                'success': True
+            })
+    else:
+        teacher = Teacher.objects.get(pk=id)
+        form = TeacherForm(instance=teacher)
+    return render(request, 'students/edit_teacher.html', {
+        'form': form
+    })
     
 def delete(request, id):
     if request.method == 'POST':
@@ -172,9 +230,15 @@ def delete(request, id):
 
 def delete_subject(request, id):
     if request.method == 'POST':
-        student = Subject.objects.get(pk=id)
-        student.delete()
+        subject = Subject.objects.get(pk=id)
+        subject.delete()
     return HttpResponseRedirect(reverse('all_subjects'))
+
+def delete_teacher(request, id):
+    if request.method == 'POST':
+        teacher = Teacher.objects.get(pk=id)
+        teacher.delete()
+    return HttpResponseRedirect(reverse('all_teachers'))
 
 
 def search_students(request):
@@ -192,5 +256,14 @@ def search_subjects(request):
         results=Subject.objects.filter(Q(sub_name__contains=searched) | Q(sub_code__contains=searched))
     return render(request,'students/all_subjects.html',{
         'subjects':results,
+        'searched':searched
+    })
+
+def search_teacher(request):
+    if request.method == 'POST':
+        searched=request.POST['searched']
+        results=Teacher.objects.filter(Q(tech_first_name__contains=searched) | Q(tech_last_name__contains=searched))
+    return render(request,'students/all_teachers.html',{
+        'teachers':results,
         'searched':searched
     })

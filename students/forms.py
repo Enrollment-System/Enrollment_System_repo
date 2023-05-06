@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student, AcademicYear, Subject
+from .models import Student, AcademicYear, Subject,Teacher
 
 class StudentForm(forms.ModelForm):
     # academic_year = queryset=AcademicYear.objects.all()
@@ -98,4 +98,23 @@ class SubjectForm(forms.ModelForm):
             'sub_description' : forms.Textarea(attrs={'class': 'form-control'}),
             'sub_reference' : forms.TextInput(attrs={'class': 'form-control'}),
             'sub_teacher' : forms.Select(attrs={'class': 'form-control'}),    
+        }
+  
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['tech_first_name', 'tech_last_name', 'tech_email','tech_department','tec_dob']
+        labels ={
+            'tech_first_name' : 'First Name',
+            'tech_last_name' : 'Last Name',
+            'tech_email' : 'Email',
+            'tech_department' : 'Department',
+            'tec_dob' : 'Date of Birth',
+        }
+        widgets = {
+            'tech_first_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'tech_last_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'tech_email' : forms.EmailInput(attrs={'class': 'form-control'}),
+            'tech_department' : forms.Select(attrs={'class': 'form-control'}),
+            'tec_dob' : forms.DateInput(attrs={'class': 'form-control'}),
         }
