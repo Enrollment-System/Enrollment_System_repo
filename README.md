@@ -1,5 +1,6 @@
 # Enrollment_System_repo
 ## Table of Contents
+- Project Overview
 - Prerequisites
 - Installation
 - Run the application
