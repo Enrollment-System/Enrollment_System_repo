@@ -3,9 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('academic_years', views.academic_years, name='academic_years'),
-    path('all_subjects', views.all_subjects, name='all_subjects'),
-    path('all_teachers', views.all_teachers, name='all_teachers'),
+    path('academic_years/', views.academic_years, name='academic_years'),
+    path('all_subjects/', views.all_subjects, name='all_subjects'),
+    path('all_teachers/', views.all_teachers, name='all_teachers'),
     path('<int:id>', views.view_student, name='view_student'),
     path('add/', views.add, name = 'add'),
     path('add_subject/', views.add_subject, name = 'add_subject'),
@@ -22,5 +22,5 @@ urlpatterns = [
     path('delete_teacher/<int:id>/', views.delete_teacher, name='delete_teacher'),
     path('search_students/',views.search_students, name='search_students'),
     path('search_subjects/',views.search_subjects, name='search_subjects'),
-    path('search_teacher/',views.search_teacher, name='search_teacher')
+    path('search_teachers/',views.search_teachers, name='search_teachers')
 ]

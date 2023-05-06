@@ -259,7 +259,7 @@ def search_subjects(request):
         'searched':searched
     })
 
-def search_teacher(request):
+def search_teachers(request):
     if request.method == 'POST':
         searched=request.POST['searched']
         results=Teacher.objects.filter(Q(tech_first_name__contains=searched) | Q(tech_last_name__contains=searched))

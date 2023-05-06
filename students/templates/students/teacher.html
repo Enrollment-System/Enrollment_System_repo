@@ -1,0 +1,29 @@
+{%  extends "students/base.html" %}
+
+{%  block body %}
+    <table class="table table-hover text-center"  >
+        <h2 class="m-4 text-center">{{ teacher.tech_first_name }} {{ teacher.tech_last_name }}</h2>
+        <tbody>
+            <tr>
+                <td>First Name</td>
+                <td>{{ teacher.tech_first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{ teacher.tech_last_name }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ teacher.tech_email }}</td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td>{{ teacher.tech_department }}</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td>{{ teacher.tec_dob }}</td>
+            </tr>
+        </tbody>
+    </table>
+{%  endblock %}

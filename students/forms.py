@@ -116,5 +116,6 @@ class TeacherForm(forms.ModelForm):
             'tech_last_name' : forms.TextInput(attrs={'class': 'form-control'}),
             'tech_email' : forms.EmailInput(attrs={'class': 'form-control'}),
             'tech_department' : forms.Select(attrs={'class': 'form-control'}),
-            'tec_dob' : forms.DateInput(attrs={'class': 'form-control'}),
+            'tec_dob' : forms.DateInput(attrs={'class': 'form-control','type':'date'})
+            
         }
