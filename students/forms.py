@@ -5,13 +5,13 @@ class StudentForm(forms.ModelForm):
     # academic_year = queryset=AcademicYear.objects.all()
     class Meta:
         model = Student
-        fields = ['student_number', 'first_name', 'last_name', 'email', 'field_of_study', 'academic_year_id', 'gpa']
+        fields = ['student_number', 'first_name', 'last_name', 'email', 'department','academic_year_id', 'gpa']
         labels = {
             'student_number': 'Student Number', 
             'first_name': 'First Name', 
             'last_name': 'Last Name', 
             'email': 'Email', 
-            'field_of_study': 'Field of Study', 
+            'department': 'Department', 
             'academic_year_id' : 'Academic Year',
             'gpa': 'GPA'
         }
@@ -20,8 +20,8 @@ class StudentForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'field_of_study': forms.TextInput(attrs={'class': 'form-control'}),
-            'academic_year_id': forms.Select(attrs={'class': 'form-control'}),
+            'department': forms.Select(attrs={'class': 'form-select'}),
+            'academic_year_id': forms.Select(attrs={'class': 'form-select'}),
             'gpa': forms.NumberInput(attrs={'class': 'form-control','min':'0', 'max':'4'}),
         }
 

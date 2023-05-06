@@ -30,7 +30,7 @@
                                         <th scope="col">First Name</th>
                                         <th scope="col">Last Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Field of Study</th>
+                                        <th scope="col">Department</th>
                                         <th scope="col">Academic Year</th>
                                         <th scope="col">GPA</th>
                                         <th scope="col">Actions</th>
@@ -43,13 +43,11 @@
                                             <td>{{ student.first_name }}</td>
                                             <td>{{ student.last_name }}</td>
                                             <td>{{ student.email }}</td>
-                                            <td>{{ student.field_of_study }}</td>
+                                            <td>{{ student.department }}</td>
                                             <td>{{ student.academic_year_id }}</td>
                                             <td>{{ student.gpa }}</td>
                                             <td>
-                                                <!-- <button type="button" class="btn btn-success me-1" href="{% url 'view_student'  student.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{student.id}}">
-                                                    <i class="fa-solid fa-circle-info fa-lg"></i>
-                                                </button> -->
+
                                                 <a class="btn btn-success me-1" href="{% url 'show_student' student.id%}">
                                                     <i class="fa-solid fa-circle-info fa-lg"></i>
                                                 </a>
@@ -71,7 +69,7 @@
                                                                     <li>First Name: <strong>{{ student.first_name }}</strong></li>
                                                                     <li>Last Name: <strong>{{ student.last_name }}</strong></li>
                                                                     <li>Email: <strong>{{ student.email }}</strong></li>
-                                                                    <li>Field of Study: <strong>{{ student.field_of_study }}</strong></li>
+                                                                    <li>Field of Study: <strong>{{ student.department }}</strong></li>
                                                                     <li>Academic Year: <strong>{{ student.academic_year_id }}</strong>
                                                                         <ul class="list-unstyled">
                                                                             <li>Subject1 : {{academic_year.subject1}}</li>

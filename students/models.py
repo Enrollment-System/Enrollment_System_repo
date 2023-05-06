@@ -14,13 +14,19 @@ class AcademicYear(models.Model):
     def __str__(self):
         return f'Grade : {self.name}'
     
+class Department(models.Model):
+    dep_name = models.CharField(max_length=50)
+    dep_n = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f'{self.dep_name}' 
     
 class Student(models.Model):
     student_number = models.PositiveIntegerField()
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
-    field_of_study = models.CharField(max_length=50)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL,null=True)
     academic_year_id = models.ForeignKey(AcademicYear, on_delete=models.SET_NULL,null=True)
     gpa = models.FloatField()
     
@@ -30,12 +36,6 @@ class Student(models.Model):
     # class Meta:
     #     ordering = ['first_name']
 
-class Department(models.Model):
-    dep_name = models.CharField(max_length=50)
-    dep_n= models.CharField(max_length=50)
-    
-    def __str__(self):
-        return f'{self.dep_name} Department' 
     
 class Teacher(models.Model):
     tech_first_name =  models.CharField(max_length=50)
