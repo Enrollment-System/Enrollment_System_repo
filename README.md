@@ -5,7 +5,7 @@
 - Run the application
 - View the application
 
-### Project Overview
+## Project Overview
 - Student Management system that allows for creating reading updating and deleting students 
 information this core functionality is known by the acronym crude create read update delete.
 - This is the application we are going to build on the home page we have a list of students 
@@ -30,7 +30,7 @@ and each subject has an instructor.
 - We can also add new subjects and instructors for these 
 subjects.
 
-### Installation
+## Installation
 
 1. Create a virtual environment
 From the root directory run:
@@ -74,12 +74,12 @@ python manage.py createsuperuser
 ```
 When prompted, enter a username, email, and password.
 
-### Run the application
+## Run the application
 From the root directory run:
 
 ```
 python manage.py runserver
 ```
 
-### View the application
+## View the application
 Go to http://127.0.0.1:8000/ to view the application.
