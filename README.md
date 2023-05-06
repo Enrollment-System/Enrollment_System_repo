@@ -1,4 +1,4 @@
-# Enrollment_System_repo
+# Enrollment Management System
 ## Table of Contents
 - Project Overview
 - Prerequisites
