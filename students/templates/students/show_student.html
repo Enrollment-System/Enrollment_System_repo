@@ -1,7 +1,7 @@
 {%  extends "students/base.html" %}
 
 {%  block body %}
-    <table class="table table-hover text-center"  >
+    <table class="table table-hover text-center" style="max-width: 1000px;" >
         <h2 class="m-4 text-center">{{ student.first_name }} {{ student.last_name }}</h2>
         <tbody>
 
@@ -23,7 +23,7 @@
             </tr> -->
             <tr>
                 <td>Academic Year</td>
-                <td>Level : {{ student.academic_year_id }}</td>
+                <td>{{ student.academic_year_id }}</td>
             </tr>
             <tr>
                 <td>Subject1</td>

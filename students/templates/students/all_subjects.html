@@ -19,7 +19,10 @@
     <div class="col-12">
         {% if subjects %}
             <div class="card bg-light mb-3 ms-4 me-4 mb-4">
-                <div class="card-header">Subject Records</div>
+                <div class="card-header row justify-content-between" style="margin-left: 0;margin-right: 0;">
+                    <div class="col-5">Subjects Records</div>
+                    <div class="col-2 " >Count : {{len}}</div>
+                </div>
                 <div class="card-body">
                     <p class="card-text">
                         <div class="table-responsive">

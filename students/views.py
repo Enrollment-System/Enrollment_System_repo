@@ -10,22 +10,27 @@ from django.db.models import Q
 def index(request):
     return render(request, 'students/index.html', {
         'students': Student.objects.all(),
+        'len' : Student.objects.all().__len__()
         # 'academic_years': AcademicYear.objects.all(),
     })
     
 def academic_years(request):
     return render(request, 'students/academic_years.html', {
         'academic_years': AcademicYear.objects.all(),
+        'len' : AcademicYear.objects.all().__len__()
     })
     
 def all_subjects(request):
     return render(request, 'students/all_subjects.html', {
         'subjects': Subject.objects.all(),
+        'len' : Subject.objects.all().__len__()
     })
     
 def all_teachers(request):
     return render(request, 'students/all_teachers.html', {
         'teachers': Teacher.objects.all(),
+        'len' : Teacher.objects.all().__len__()
+        
     })
 
 def view_student(request, id):
@@ -57,9 +62,12 @@ def show_subject(request, id):
     
 def show_teacher(request, id):
     teacher = Teacher.objects.get(pk=id)
-    
+    subjects = Subject.objects.filter(sub_teacher=id)
+    len = subjects.__len__()
+    print(subjects.__len__())
     return render(request,'students/teacher.html',{
         'teacher':teacher,
+        'subjects':subjects,
     })
 
 def add(request):
@@ -245,25 +253,33 @@ def search_students(request):
     if request.method == 'POST':
         searched=request.POST['searched']
         results=Student.objects.filter(Q(first_name__contains=searched) | Q(last_name__contains=searched))
+        len = results.__len__() 
     return render(request,'students/index.html',{
         'students':results,
-        'searched':searched
+        'searched':searched,
+        'len' : len
+        
     })
     
 def search_subjects(request):
     if request.method == 'POST':
         searched=request.POST['searched']
         results=Subject.objects.filter(Q(sub_name__contains=searched) | Q(sub_code__contains=searched))
+        len = results.__len__()
     return render(request,'students/all_subjects.html',{
         'subjects':results,
-        'searched':searched
+        'searched':searched,
+        'len' : len
     })
 
 def search_teachers(request):
     if request.method == 'POST':
         searched=request.POST['searched']
         results=Teacher.objects.filter(Q(tech_first_name__contains=searched) | Q(tech_last_name__contains=searched))
+        len = results.__len__()
     return render(request,'students/all_teachers.html',{
         'teachers':results,
-        'searched':searched
+        'searched':searched,
+        'len' : len
+        
     })
