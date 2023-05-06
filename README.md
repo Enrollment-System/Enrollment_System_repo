@@ -35,7 +35,9 @@ subjects.
 1. Create a virtual environment
 From the root directory run:
 
-``` python -m venv venv ````
+``` 
+python -m venv venv 
+````
 2. Activate the virtual environment
 From the root directory run:
 
