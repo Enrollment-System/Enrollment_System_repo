@@ -25,7 +25,23 @@ class StudentForm(forms.ModelForm):
             'gpa': forms.NumberInput(attrs={'class': 'form-control','min':'0', 'max':'4'}),
         }
 
+class subjectChoiceField(forms.ChoiceField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.choices == []:
+            self.choices=self.widget.choices = self.get_subject_choices()
+            self.widget.attrs.update({
+            'class': 'form-select'
+        })
+            
+    def get_subject_choices(self):
+        k = [('None','----')]
+        f = [(c.sub_name, c.sub_name) for c in Subject.objects.all()]
+        return k + f
+    
 class AcademicYearForm(forms.ModelForm):
+    # subject1=forms.ModelChoiceField(queryset=Subject.objects.all())
+    # my_param=5
     class Meta:
         model = AcademicYear
         fields = ['subject1','subject2','subject3','subject4','subject5','subject6']
@@ -38,13 +54,30 @@ class AcademicYearForm(forms.ModelForm):
             'subject6' : 'Subject 6',
         }
         widgets = {
-            'subject1': forms.TextInput(attrs={'class': 'form-control'}),
+            'subject1': forms.Select(attrs={'class': 'form-select'}),
             'subject2': forms.TextInput(attrs={'class': 'form-control'}),
             'subject3': forms.TextInput(attrs={'class': 'form-control'}),
             'subject4': forms.TextInput(attrs={'class': 'form-control'}),
             'subject5': forms.TextInput(attrs={'class': 'form-control'}),
             'subject6': forms.TextInput(attrs={'class': 'form-control'}),
         }
+    
+    # def __init__(self, my_param, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.my_param = my_param
+    #     my_param=self.my_param
+        
+    # print(my_param)
+    
+    subject1=subjectChoiceField()   
+    subject2=subjectChoiceField()   
+    subject3=subjectChoiceField()   
+    subject4=subjectChoiceField()   
+    subject5=subjectChoiceField()   
+    subject6=subjectChoiceField()   
+        
+    
+    
   
 class SubjectForm(forms.ModelForm):
     class Meta:
